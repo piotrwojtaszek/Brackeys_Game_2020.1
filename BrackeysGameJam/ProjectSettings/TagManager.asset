@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Background
+  - Obsticle
+  - Enemy
+  - Details
+  - Player
+  - Foreground
+  - Bullet
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1148542461
+    locked: 0
+  - name: Obsticle
+    uniqueID: 1754221595
+    locked: 0
+  - name: Enemy
+    uniqueID: 3667959333
+    locked: 0
+  - name: Details
+    uniqueID: 3560683359
+    locked: 0
+  - name: Player
+    uniqueID: 2887782941
+    locked: 0
+  - name: Foreground
+    uniqueID: 210334575
+    locked: 0
