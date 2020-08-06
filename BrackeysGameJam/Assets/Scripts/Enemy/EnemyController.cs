@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyController : CharacterBase, Rewind, GoodShoot
 {
+    //teleportujace sie gowna
     // Start is called before the first frame update
     void Start()
     {

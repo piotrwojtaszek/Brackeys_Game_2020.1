@@ -5,15 +5,16 @@ using UnityEngine;
 
 public class UIAmmo : MonoBehaviour
 {
+    TextMeshProUGUI m_tmp;
     // Start is called before the first frame update
     void Start()
     {
-        
+        m_tmp = GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        GetComponent<TextMeshProUGUI>().text = PlayerController.Instance.GetAmmo().ToString();
+        m_tmp.text = PlayerController.Instance.GetAmmo().ToString();
     }
 }

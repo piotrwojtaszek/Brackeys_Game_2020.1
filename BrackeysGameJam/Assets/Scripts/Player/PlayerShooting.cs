@@ -15,9 +15,13 @@ public class PlayerShooting : MonoBehaviour
     [Range(0.001f, 20f)]
     private float m_fireRate;
     private bool m_isMidShot;
+    AudioSource m_audioSource;
+    AudioClip m_shootSound;
     private void Awake()
     {
         m_bulletPrefab = Resources.Load<GameObject>("Prefabs/RedBullet");
+        m_shootSound = Resources.Load<AudioClip>("SFX/shoot");
+        m_audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -33,6 +37,8 @@ public class PlayerShooting : MonoBehaviour
     {
         m_isMidShot = true;
         StartCoroutine(ShootLight());
+        m_audioSource.clip = m_shootSound;
+        m_audioSource.Play();
         GameObject bullet = Instantiate(m_bulletPrefab, m_firePoint.position, m_firePoint.rotation);
         bullet.GetComponent<BulletController>().SetOnStart(m_bulletForce, m_firePoint, 1);
         yield return new WaitForSeconds(1f / m_fireRate);
