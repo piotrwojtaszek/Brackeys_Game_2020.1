@@ -95,7 +95,7 @@ MonoBehaviour:
   m_ignoreMask:
     serializedVersion: 2
     m_Bits: 16384
-  m_lifetime: 30
+  m_lifetime: 10
   m_speed: 1
   m_collisionChecker: {fileID: 7491503504666454600}
 --- !u!1001 &6137458555565439280
