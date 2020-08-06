@@ -14,6 +14,6 @@ public class UIAmmo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<TextMeshProUGUI>().text = PlayerController.Instance.m_rewindTime.ToString();
+        GetComponent<TextMeshProUGUI>().text = PlayerController.Instance.GetAmmo().ToString();
     }
 }

@@ -12,16 +12,12 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField]
     private float m_bulletForce = 20f;
     [SerializeField]
-    [Range(0.001f, 10f)]
+    [Range(0.001f, 20f)]
     private float m_fireRate;
     private bool m_isMidShot;
     private void Awake()
     {
-        m_bulletPrefab = Resources.Load<GameObject>("Prefabs/BlueBullet");
-    }
-    void Start()
-    {
-
+        m_bulletPrefab = Resources.Load<GameObject>("Prefabs/RedBullet");
     }
 
     // Update is called once per frame
@@ -36,10 +32,8 @@ public class PlayerShooting : MonoBehaviour
     private IEnumerator Shoot()
     {
         m_isMidShot = true;
-        PlayerController.Instance.SubstractAmmo(1);
         GameObject bullet = Instantiate(m_bulletPrefab, m_firePoint.position, m_firePoint.rotation);
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.velocity = m_firePoint.up * m_bulletForce;
+        bullet.GetComponent<BulletController>().SetOnStart(m_bulletForce, m_firePoint);
         yield return new WaitForSeconds(1f / m_fireRate);
         m_isMidShot = false;
     }

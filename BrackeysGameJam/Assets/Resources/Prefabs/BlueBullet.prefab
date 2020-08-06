@@ -94,10 +94,16 @@ MonoBehaviour:
     m_Bits: 512
   m_ignoreMask:
     serializedVersion: 2
-    m_Bits: 16384
+    m_Bits: 49152
+  m_enemyLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   m_lifetime: 10
   m_speed: 1
+  m_currentLifetime: 0
   m_collisionChecker: {fileID: 7491503504666454600}
+  m_isRewind: 0
+  m_damage: 1
 --- !u!1001 &6137458555565439280
 PrefabInstance:
   m_ObjectHideFlags: 0

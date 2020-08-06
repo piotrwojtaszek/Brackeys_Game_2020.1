@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance;
     public CinemachineVirtualCamera m_baseCamera;
     public CinemachineVirtualCamera m_rewindCamera;
-    private int m_ammo = 3;
+    [SerializeField]
+    private int m_ammo = 10;
     public float m_rewindTime = 10f;
     private void Awake()
     {
