@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour,Rewind,GoodShoot
+public class EnemyController : CharacterBase, Rewind, GoodShoot
 {
-    private float m_maxHealth = 20f;
-    [SerializeField]
-    private float m_currentHealth;
     // Start is called before the first frame update
     void Start()
     {

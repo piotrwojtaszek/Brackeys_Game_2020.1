@@ -23,7 +23,7 @@ public class PlayerShooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Fire1") && !m_isMidShot && PlayerController.Instance.GetAmmo()>0)
+        if (Input.GetButton("Fire1") && !m_isMidShot && PlayerController.Instance.GetAmmo() > 0)
         {
             StartCoroutine(Shoot());
         }
@@ -32,9 +32,17 @@ public class PlayerShooting : MonoBehaviour
     private IEnumerator Shoot()
     {
         m_isMidShot = true;
+        StartCoroutine(ShootLight());
         GameObject bullet = Instantiate(m_bulletPrefab, m_firePoint.position, m_firePoint.rotation);
-        bullet.GetComponent<BulletController>().SetOnStart(m_bulletForce, m_firePoint);
+        bullet.GetComponent<BulletController>().SetOnStart(m_bulletForce, m_firePoint, 1);
         yield return new WaitForSeconds(1f / m_fireRate);
         m_isMidShot = false;
+    }
+
+    private IEnumerator ShootLight()
+    {
+        PlayerController.Instance.m_shotLight.intensity = 0.5f;
+            yield return new WaitForSeconds(.05f);
+        PlayerController.Instance.m_shotLight.intensity = 0f;
     }
 }

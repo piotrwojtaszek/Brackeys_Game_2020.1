@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private int m_ammo = 10;
     public float m_rewindTime = 10f;
+    public bool m_isRewinding = false;
+    public Light2D m_shotLight;
+    public Light2D m_spotLight;
     private void Awake()
     {
         if (Instance == null)
@@ -30,7 +34,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ActiveRewind();
         CameraController();
+        SpotLightRewindEffect();
     }
 
     public void AddAmmo(int amount)
@@ -46,9 +52,21 @@ public class PlayerController : MonoBehaviour
         return m_ammo;
     }
 
-    private void CameraController()
+    private void ActiveRewind()
     {
         if (Input.GetMouseButton(1))
+        {
+            m_isRewinding = true;
+        }
+        else
+        {
+            m_isRewinding = false;
+        }
+    }
+
+    private void CameraController()
+    {
+        if (m_isRewinding)
         {
             if (m_rewindTime > 0.1f)
                 m_rewindTime -= Time.deltaTime;
@@ -60,6 +78,18 @@ public class PlayerController : MonoBehaviour
             m_rewindCamera.Priority = 1;
             if (m_rewindTime < 10f)
                 m_rewindTime += Time.deltaTime;
+        }
+    }
+
+    private void SpotLightRewindEffect()
+    {
+        if(m_isRewinding)
+        {
+            m_spotLight.intensity = Random.Range(.7f, 1.3f);
+        }
+        else
+        {
+            m_spotLight.intensity = 1f;
         }
     }
 }

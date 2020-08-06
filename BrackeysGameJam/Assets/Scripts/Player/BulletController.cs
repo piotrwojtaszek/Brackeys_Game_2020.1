@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
+    public float m_damage = 1f;
     private Rigidbody2D m_rb;
     private void Awake()
     {
         m_rb = GetComponent<Rigidbody2D>();
-        PlayerController.Instance.SubstractAmmo(1);
 
     }
     // Start is called before the first frame update
@@ -23,15 +23,21 @@ public class BulletController : MonoBehaviour
 
     }
 
-    public void SetOnStart(float speed, Transform direction)
+    public void SetOnStart(float speed, Transform direction,int cost)
     {
         m_rb.velocity = direction.up * speed;
+        PlayerController.Instance.SubstractAmmo(cost);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.GetComponent<GoodShoot>() != null)
+        if (collision.collider.GetComponent<EnemyController>() != null)
+        {
             collision.collider.GetComponent<GoodShoot>().Award();
+            collision.collider.GetComponent<EnemyController>().ReciveDamage(m_damage);
+
+        }
+
         Destroy(gameObject);
     }
 }

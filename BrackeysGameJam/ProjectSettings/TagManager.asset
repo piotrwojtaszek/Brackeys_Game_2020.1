@@ -47,11 +47,11 @@ TagManager:
   - name: Obsticle
     uniqueID: 1754221595
     locked: 0
-  - name: Enemy
-    uniqueID: 3667959333
-    locked: 0
   - name: Details
     uniqueID: 3560683359
+    locked: 0
+  - name: Enemy
+    uniqueID: 3667959333
     locked: 0
   - name: Player
     uniqueID: 2887782941
