@@ -7,11 +7,14 @@ public class EnemyController : CharacterBase, Rewind, GoodShoot
     //teleportujace sie gowna
     // Start is called before the first frame update
     GameObject m_bulletFragment;
+    GameObject m_particle;
     void Start()
     {
         m_currentHealth = m_maxHealth;
         m_bulletFragment = Resources.Load<GameObject>("Prefabs/BulletFragment");
+        m_particle = Resources.Load<GameObject>("Prefabs/VFX/EnemyDeath");
         GameManager.Instance.m_allEnemys++;
+        GameManager.Instance.m_angryEnemys++;
     }
 
     // Update is called once per frame
@@ -55,6 +58,8 @@ public class EnemyController : CharacterBase, Rewind, GoodShoot
     {
         GameManager.Instance.m_allEnemys--;
         GameManager.Instance.m_angryEnemys--;
+        GameManager.Instance.ChangeMusicMode();
+        Instantiate(m_particle, transform.position, Quaternion.identity);
         GameObject m_bulletPrefab = Resources.Load<GameObject>("Prefabs/Ammo");
         GameObject bullet = Instantiate(m_bulletPrefab, transform.position + new Vector3(0f,0.2f), Quaternion.identity);
         Destroy(gameObject);

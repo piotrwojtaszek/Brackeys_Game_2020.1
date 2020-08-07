@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Audio;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -80,5 +81,25 @@ public class GameManager : MonoBehaviour
     public void ResetScene()
     {
 
+    }
+
+    public void ChangeMusicMode()
+    {
+        if(m_angryEnemys>0)
+        {
+            if(!AudioManager.Instance.IsPlaying("ActionMusic"))
+            {
+                AudioManager.Instance.Stop("ChillMusic");
+                AudioManager.Instance.Play("ActionMusic");
+            }
+        }
+        else
+        {
+            if (!AudioManager.Instance.IsPlaying("ChillMusic"))
+            {
+                AudioManager.Instance.Play("ChillMusic");
+                AudioManager.Instance.Stop("ActionMusic");
+            }
+        }
     }
 }

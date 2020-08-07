@@ -41,6 +41,7 @@ public class PlayerController : CharacterBase
         ActiveRewind();
         CameraController();
         SpotLightRewindEffect();
+        RewindSoundPlayer();
     }
 
     private void ActiveRewind()
@@ -59,6 +60,18 @@ public class PlayerController : CharacterBase
         else
         {
             m_isRewinding = false;
+        }
+    }
+
+    void RewindSoundPlayer()
+    {
+        if (m_isRewinding && !AudioManager.Instance.IsPlaying("Rewind"))
+        {
+            AudioManager.Instance.Play("Rewind");
+        }
+        if(!m_isRewinding)
+        {
+            AudioManager.Instance.Stop("Rewind");
         }
     }
 
