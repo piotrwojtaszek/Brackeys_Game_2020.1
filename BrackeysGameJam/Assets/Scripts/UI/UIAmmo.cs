@@ -15,6 +15,6 @@ public class UIAmmo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_tmp.text = PlayerController.Instance.GetAmmo().ToString();
+        m_tmp.text = GameManager.Instance.GetAmmo().ToString();
     }
 }

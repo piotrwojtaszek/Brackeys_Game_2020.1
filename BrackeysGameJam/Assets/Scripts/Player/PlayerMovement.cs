@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
         m_input.x = Input.GetAxis("Horizontal");
         m_input.y = Input.GetAxis("Vertical");
-        m_rb.MovePosition(m_rb.position + m_input * m_speed * Time.fixedDeltaTime);
+        m_rb.velocity = m_input * m_speed;
 
         m_mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }

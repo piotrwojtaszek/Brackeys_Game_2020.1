@@ -128,8 +128,8 @@ QualitySettings:
     shadowmaskMode: 1
     skinWeights: 2
     textureQuality: 0
-    anisotropicTextures: 0
-    antiAliasing: 0
+    anisotropicTextures: 1
+    antiAliasing: 4
     softParticles: 0
     softVegetation: 1
     realtimeReflectionProbes: 0
@@ -148,7 +148,8 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 0}
+    customRenderPipeline: {fileID: 11400000, guid: 449679fff4f5f8b4580169654f69ab00,
+      type: 2}
     excludedTargetPlatforms: []
   - serializedVersion: 2
     name: Very High

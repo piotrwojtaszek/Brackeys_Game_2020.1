@@ -33,16 +33,5 @@ public class BulletFragment : MonoBehaviour, Rewind
             GameObject bullet = Instantiate(m_bulletPrefab, transform.position, transform.rotation);
             Destroy(gameObject);
         }
-
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        /*if (collision.GetComponent<PlayerController>())
-        {
-            collision.GetComponent<PlayerController>().AddAmmo(1);
-            Destroy(gameObject);
-        }*/
-    }
-
 }

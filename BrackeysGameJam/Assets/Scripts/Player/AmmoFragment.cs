@@ -8,7 +8,7 @@ public class AmmoFragment : MonoBehaviour
     {
         if (collision.GetComponent<PlayerController>())
         {
-            collision.GetComponent<PlayerController>().AddAmmo(1);
+            GameManager.Instance.AddAmmo(1);
             Destroy(gameObject);
         }
     }

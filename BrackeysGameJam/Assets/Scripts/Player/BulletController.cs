@@ -6,38 +6,30 @@ public class BulletController : MonoBehaviour
 {
     public float m_damage = 1f;
     private Rigidbody2D m_rb;
+    EnemyController m_enemyController;
     private void Awake()
     {
         m_rb = GetComponent<Rigidbody2D>();
-
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void SetOnStart(float speed, Transform direction,int cost)
+    public void SetOnStart(float speed, Transform direction, int cost)
     {
         m_rb.velocity = direction.up * speed;
-        PlayerController.Instance.SubstractAmmo(cost);
+        GameManager.Instance.SubstractAmmo(cost);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.GetComponent<EnemyController>() != null)
-        {
-            collision.collider.GetComponent<GoodShoot>().Award();
-            collision.collider.GetComponent<EnemyController>().ReciveDamage(m_damage);
-
-        }
+            m_enemyController = collision.collider.GetComponent<EnemyController>();
 
         Destroy(gameObject);
+    }
+    private void OnDestroy()
+    {
+        if (m_enemyController != null)
+        {
+            m_enemyController.ReciveDamage(m_damage);
+        }
     }
 }

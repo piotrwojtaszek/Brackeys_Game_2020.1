@@ -20,14 +20,14 @@ public class PlayerShooting : MonoBehaviour
     private void Awake()
     {
         m_bulletPrefab = Resources.Load<GameObject>("Prefabs/RedBullet");
-        m_shootSound = Resources.Load<AudioClip>("SFX/shoot");
+        m_shootSound = Resources.Load<AudioClip>("SFX/Effects/shoot");
         m_audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Fire1") && !m_isMidShot && PlayerController.Instance.GetAmmo() > 0)
+        if (Input.GetButton("Fire1") && !m_isMidShot && GameManager.Instance.GetAmmo() > 0)
         {
             StartCoroutine(Shoot());
         }

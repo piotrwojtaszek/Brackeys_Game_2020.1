@@ -13,7 +13,7 @@ public class RecoilCollider : MonoBehaviour
             if (collision.GetComponent<Bullet>().m_isRewind || collision.GetComponent<Bullet>().m_currentLifetime > .5f)
             {
                 Destroy(collision.gameObject);
-                PlayerController.Instance.AddAmmo(1);
+                GameManager.Instance.AddAmmo(1);
             }
         }
     }
@@ -25,7 +25,7 @@ public class RecoilCollider : MonoBehaviour
             if (collision.GetComponent<Bullet>().m_isRewind || collision.GetComponent<Bullet>().m_currentLifetime > .5f)
             {
                 Destroy(collision.gameObject);
-                PlayerController.Instance.AddAmmo(1);
+                GameManager.Instance.AddAmmo(1);
             }
         }
     }

@@ -6,9 +6,11 @@ public class EnemyController : CharacterBase, Rewind, GoodShoot
 {
     //teleportujace sie gowna
     // Start is called before the first frame update
+    GameObject m_bulletFragment;
     void Start()
     {
         m_currentHealth = m_maxHealth;
+        m_bulletFragment = Resources.Load<GameObject>("Prefabs/BulletFragment");
     }
 
     // Update is called once per frame
@@ -33,13 +35,18 @@ public class EnemyController : CharacterBase, Rewind, GoodShoot
 
     public void Award()
     {
-        GameObject bulletFragment = Resources.Load<GameObject>("Prefabs/BulletFragment");
-        Vector2 instantianePos = Random.insideUnitCircle/2f + (Vector2)transform.position;
-        Instantiate(bulletFragment, instantianePos, Quaternion.identity);
+        Vector2 instantianePos = (Vector2)transform.position;
+        Instantiate(m_bulletFragment, instantianePos, Quaternion.identity);
     }
 
     public void RewindTime()
     {
         throw new System.NotImplementedException();
+    }
+
+    public override void ReciveDamage(float damage)
+    {
+        base.ReciveDamage(damage);
+        Award();
     }
 }
