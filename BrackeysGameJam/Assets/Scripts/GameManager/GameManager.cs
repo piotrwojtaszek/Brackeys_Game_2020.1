@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public int m_angryEnemys;
+    public int m_allEnemys;
     public enum RewindMode
     {
         bullets,
@@ -13,6 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int m_ammo = 10;
     private RewindMode m_rewindMode = RewindMode.bullets;
+    // set on level change
+    private float m_playerHealth = 100f;
     private void Awake()
     {
         if (Instance == null)
@@ -22,7 +26,9 @@ public class GameManager : MonoBehaviour
         else if (Instance != this)
         {
             Destroy(gameObject);
+            return;
         }
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
@@ -38,9 +44,11 @@ public class GameManager : MonoBehaviour
         switch(m_rewindMode)
         {
             case RewindMode.bullets:
+                PlayerController.Instance.m_rewindCost = 2f;
                 m_rewindMode = RewindMode.player;
                 break;
             case RewindMode.player:
+                PlayerController.Instance.m_rewindCost = 1f;
                 m_rewindMode = RewindMode.bullets;
                 break;
         }
@@ -61,5 +69,16 @@ public class GameManager : MonoBehaviour
     public RewindMode GetRewindMode()
     {
         return m_rewindMode;
+    }
+
+    public void ChangeScene(int index)
+    {
+        m_playerHealth = PlayerController.Instance.m_currentHealth;
+
+    }
+
+    public void ResetScene()
+    {
+
     }
 }

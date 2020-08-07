@@ -14,16 +14,6 @@ public class PlayerRewind : MonoBehaviour, Rewind
     // Update is called once per frame
     void FixedUpdate()
     {
-        /*if (GameManager.Instance.GetRewindMode() == GameManager.RewindMode.bullets && PlayerController.Instance.m_isRewinding)
-        {
-
-        }
-
-        if (!PlayerController.Instance.m_isRewinding)
-        {
-
-        }
-        */
         if (GameManager.Instance.GetRewindMode() == GameManager.RewindMode.player && PlayerController.Instance.m_isRewinding)
             RewindTime();
         else
@@ -35,7 +25,7 @@ public class PlayerRewind : MonoBehaviour, Rewind
 
     void Record()
     {
-        if (m_postions.Count > Mathf.Round(2f / Time.fixedDeltaTime))
+        if (m_postions.Count > Mathf.Round(2.5f / Time.fixedDeltaTime))
             m_postions.RemoveAt(m_postions.Count - 1);
 
         m_postions.Insert(0, transform.position);
