@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         m_rb = GetComponent<Rigidbody2D>();
-        AudioManager.Instance.Play("ChillMusic");
     }
     void Start()
     {

@@ -20,6 +20,7 @@ public class PlayerRewind : MonoBehaviour, Rewind
         {
             Record();
             m_collider.enabled = true;
+            GetComponent<PlayerMovement>().enabled = true;
         }
     }
 
@@ -35,6 +36,7 @@ public class PlayerRewind : MonoBehaviour, Rewind
     {
         if (m_postions.Count > 1)
         {
+            GetComponent<PlayerMovement>().enabled = false;
             transform.position = m_postions[0];
             m_postions.RemoveAt(0);
             m_postions.RemoveAt(0);

@@ -6,73 +6,45 @@ using System;
 
 public class EnemyAI : MonoBehaviour
 {
-    public Transform target;
-    public Transform graphics;
-    public float speed = 200f;
-    public float nextWaypointDistance = 3f;
+    public float m_radius;
+    public LayerMask m_layer;
+    public LayerMask m_obstilceMask;
+    AIDestinationSetter m_setter;
 
-    Path path;
-    int currentWaypoint = 0;
-    bool reachedEndOfPath = false;
-
-    Seeker seeker;
-    Rigidbody2D rb;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        seeker = GetComponent<Seeker>();
-        rb = GetComponent<Rigidbody2D>();
-        target = PlayerController.Instance.GetComponent<Transform>();
-
-        InvokeRepeating("UpdatePath", 0f, 0.25f);
+        m_setter = GetComponent<AIDestinationSetter>();
+        StartCoroutine(LookForPlayer());
     }
 
-    void UpdatePath()
+
+    IEnumerator LookForPlayer()
     {
-        if (seeker.IsDone())
-            seeker.StartPath(rb.position, target.position, OnPathComplete);
+        while (m_setter.target == null)
+        {
+            Collider2D col = Physics2D.OverlapCircle(transform.position, m_radius, m_layer);
+            if (col != null)
+            {
+                Vector2 direction = (Vector2)(PlayerController.Instance.transform.position - transform.position).normalized;
+                RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, direction, m_radius);
+                RaycastHit2D hitInfoObsticle = Physics2D.Raycast(transform.position, direction, m_radius, 1 << LayerMask.NameToLayer("Obsticle"));
+                PlayerController player = hitInfo.transform.GetComponent<PlayerController>();
+
+                if (player != null && hitInfoObsticle.collider == null)
+                {
+                    Debug.DrawRay(transform.position, direction * m_radius);
+                    GetComponent<AIDestinationSetter>().target = PlayerController.Instance.transform;
+                    Destroy(GetComponent<EnemyAI>());
+                    break;
+                }
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
+
     }
 
-    private void OnPathComplete(Path p)
+    private void OnDrawGizmos()
     {
-        if (!p.error)
-        {
-            path = p;
-            currentWaypoint = 0;
-        }
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        if (path == null)
-            return;
-
-        if (currentWaypoint >= path.vectorPath.Count)
-        {
-            reachedEndOfPath = true;
-            return;
-        }
-        else
-        {
-            reachedEndOfPath = false;
-        }
-
-        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        Vector2 force = direction * speed * Time.deltaTime;
-
-        rb.AddForce(force);
-
-        float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
-
-        if (distance < nextWaypointDistance)
-        {
-            currentWaypoint++;
-        }
-        Vector2 lookDir = (Vector2)path.vectorPath[currentWaypoint] - rb.position;
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
-        rb.rotation = angle;
-
+        Gizmos.DrawWireSphere(transform.position, m_radius);
     }
 }

@@ -32,6 +32,7 @@ public class PlayerController : CharacterBase
     {
         m_rewindTime = m_maxRewindTime / 2f;
         m_rb = GetComponent<Rigidbody2D>();
+        AudioManager.Instance.Play("ChillMusic");
     }
 
     // Update is called once per frame
