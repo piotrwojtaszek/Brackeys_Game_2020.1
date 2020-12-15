@@ -58,7 +58,7 @@ public class EnemyController : CharacterBase, Rewind, GoodShoot
     {
         GameManager.Instance.m_allEnemys--;
         GameManager.Instance.m_angryEnemys--;
-        GameManager.Instance.ChangeMusicMode();
+
         Instantiate(m_particle, transform.position, Quaternion.identity);
         GameObject m_bulletPrefab = Resources.Load<GameObject>("Prefabs/Ammo");
         GameObject bullet = Instantiate(m_bulletPrefab, transform.position + new Vector3(0f,0.2f), Quaternion.identity);

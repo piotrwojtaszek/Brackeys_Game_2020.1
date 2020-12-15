@@ -34,6 +34,7 @@ public class EnemyAI : MonoBehaviour
                 {
                     Debug.DrawRay(transform.position, direction * m_radius);
                     GetComponent<AIDestinationSetter>().target = PlayerController.Instance.transform;
+                    GameManager.Instance.ChangeMusicMode();
                     Destroy(GetComponent<EnemyAI>());
                     break;
                 }
